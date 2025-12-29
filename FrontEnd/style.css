@@ -63,16 +63,25 @@ body {
   font-weight: 600;
 }
 
-/* Inputs */
-input {
+/* Inputs + Select box (same size) */
+input,
+.form-row select {
   width: 420px;
   height: 42px;
   border: none;
   padding: 0 12px;
   font-size: 16px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  font-family: inherit;
 }
 
-/* Submit button exactly like image */
+/* Submit button */
 .submit-btn {
   margin-left: 340px;
   width: 220px;
