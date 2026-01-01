@@ -9,7 +9,6 @@ html, body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Fixed background */
 body {
   background-image: url("Fishes.jpg");
   background-size: cover;
@@ -18,13 +17,11 @@ body {
   color: white;
 }
 
-/* Shared section */
 .section {
   height: 100vh;
   width: 100%;
 }
 
-/* Hero page */
 .hero {
   display: flex;
   justify-content: center;
@@ -37,7 +34,6 @@ body {
   letter-spacing: 2px;
 }
 
-/* Form page */
 .form-section {
   display: flex;
   justify-content: center;
@@ -49,21 +45,18 @@ body {
   max-width: 1100px;
 }
 
-/* Rows */
 .form-row {
   display: flex;
   align-items: center;
   margin-bottom: 38px;
 }
 
-/* Labels */
 .form-label {
   width: 340px;
   font-size: 26px;
   font-weight: 600;
 }
 
-/* Inputs + Select box (same size) */
 input,
 .form-row select {
   width: 420px;
@@ -76,12 +69,9 @@ input,
   border-radius: 5px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
   font-family: inherit;
 }
 
-/* Submit button */
 .submit-btn {
   margin-left: 340px;
   width: 220px;
@@ -92,8 +82,51 @@ input,
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .submit-btn:hover {
   background-color: #74261d;
+}
+
+.loader {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #8e2f23;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1.2s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+#error, .error {
+  color: red;
+  font-weight: bold;
+  text-align: center;
+}
+
+#result-container {
+  margin-top: 40px;
+  padding: 30px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  border-radius: 15px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 18px;
+  max-width: 90%;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+#result-text {
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
