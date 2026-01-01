@@ -1,3 +1,7 @@
 .DS_Store
 *.xlsx
 .env
+/Later Datas
+__pycache__/
+*.pyc
+*.xlsx
