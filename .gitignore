@@ -9,3 +9,4 @@ __pycache__/
 /Data/test.py
 .python-version
 uv.lock
+*.mov
