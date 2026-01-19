@@ -1,4 +1,4 @@
-## Herewe are fetching the Coordinates and Marine Animal data for the final Verdict
+## Here we are fetching the Coordinates and Marine Animal data for the final Verdict
 from supabase import create_client
 from dotenv import load_dotenv
 import os
