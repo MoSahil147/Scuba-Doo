@@ -1,41 +1,42 @@
 const locations = [
-  { name: "Tiger Beach", region: "Grand Bahama", country: "Bahamas" },
+  { name: "Snoopy Island", region: "Fujairah, Al Aqah", country: "UAE" },
+  { name: "Shark Island", region: "Fujairah, Al Aqah", country: "UAE" },
   { name: "Anemone Gardens", region: "Fujairah, Al Aqah", country: "UAE" },
-  { name: "Artificial Reef", region: "Fujairah, Al Aqah", country: "UAE" },
-  { name: "Barracuda Point", region: "Sabah", country: "Malaysia" },
-  { name: "Blue Corner", region: "Koror", country: "Palau" },
-  { name: "Brothers Islands", region: "Red Sea", country: "Egypt" },
-  { name: "Cape Kri", region: "Raja Ampat", country: "Indonesia" },
-  { name: "Coral Gardens", region: "Fujairah, Al Aqah", country: "UAE" },
   { name: "Dibba Island", region: "Fujairah", country: "UAE" },
-  { name: "Darwin Island", region: "Galápagos", country: "Ecuador" },
-  { name: "Daymaniyat Islands (Three Sisters)", region: "Daymaniyat Islands", country: "Oman" },
-  { name: "Lembeh Strait", region: "North Sulawesi", country: "Indonesia" },
-  { name: "Hanifaru Bay", region: "Baa Atoll", country: "Maldives" },
+  { name: "Martini Rock", region: "Fujairah, Al Aqah", country: "UAE" },
   { name: "Inchcape 1 Wreck", region: "Fujairah, Al Aqah", country: "UAE" },
   { name: "Inchcape 2 Wreck", region: "Fujairah, Al Aqah", country: "UAE" },
-  { name: "Musandam Fjords", region: "Musandam, Khasab", country: "Oman" },
-  { name: "Martini Rock", region: "Fujairah, Al Aqah", country: "UAE" },
-  { name: "Martin Wall", region: "Fujairah, Al Aqah", country: "UAE" },
-  { name: "Maradona Point", region: "British Columbia", country: "Canada" },
-  { name: "Monterey Bay", region: "California", country: "USA" },
-  { name: "Monad Shoal", region: "Malapascua", country: "Philippines" },
-  { name: "Bandar Khayran", region: "Muscat", country: "Oman" },
-  { name: "Ningaloo Reef", region: "Western Australia", country: "Australia" },
-  { name: "San Carlos Beach", region: "Monterey, California", country: "USA" },
-  { name: "Shark Island", region: "Fujairah, Al Aqah", country: "UAE" },
-  { name: "Snoopy Island", region: "Fujairah, Al Aqah", country: "UAE" },
+  { name: "Martini Wall", region: "Fujairah, Al Aqah", country: "UAE" },
   { name: "Snoopy Deep Reef", region: "Fujairah, Al Aqah", country: "UAE" },
-  { name: "Sipadan Island", region: "Sabah", country: "Malaysia" },
+  { name: "Artificial Reef", region: "Fujairah, Al Aqah", country: "UAE" },
+  { name: "Coral Gardens", region: "Fujairah, Al Aqah", country: "UAE" },
+
+  { name: "Daymaniyat Islands (Three Sisters)", region: "Daymaniyat Islands", country: "Oman" },
+  { name: "Musandam Fjords", region: "Musandam, Khasab", country: "Oman" },
+  { name: "Bandar Khayran", region: "Muscat", country: "Oman" },
+
+  { name: "Ningaloo Reef", region: "Western Australia", country: "Australia" },
+  { name: "Darwin Island", region: "Galapagos", country: "Ecuador" },
+  { name: "Tofo", region: "Inhambane Province", country: "Mozambique" },
+  { name: "Hanifaru Bay", region: "Baa Atoll", country: "Maldives" },
+  { name: "Socorro Island", region: "Revillagigedo Islands", country: "Mexico" },
+  { name: "Tiger Beach", region: "Grand Bahama", country: "Bahamas" },
   { name: "Aliwal Shoal", region: "KwaZulu-Natal", country: "South Africa" },
-  { name: "Staghorn Point", region: "Fujairah, Al Aqah", country: "UAE" },
+  { name: "Brothers Islands", region: "Red Sea", country: "Egypt" },
+  { name: "Blue Corner", region: "Koror", country: "Palau" },
+  { name: "Monad Shoal", region: "Malapascua", country: "Philippines" },
+  { name: "Sipadan Island", region: "Sabah", country: "Malaysia" },
+  { name: "Barracuda Point", region: "Sabah", country: "Malaysia" },
   { name: "Turtle City", region: "Gili Islands", country: "Indonesia" },
-  { name: "Tubbataha Reefs", region: "Sulu Sea", country: "Philippines" },
-  { name: "Poor Knights Islands", region: "Northland", country: "New Zealand" },
   { name: "Manta Point", region: "Komodo National Park", country: "Indonesia" },
   { name: "Crystal Bay", region: "Nusa Penida", country: "Indonesia" },
-  { name: "Tofo", region: "Inhambane Province", country: "Mozambique" },
-  { name: "Socorro Island", region: "Revillagigedo Islands", country: "Mexico" }
+  { name: "Cape Kri", region: "Raja Ampat", country: "Indonesia" },
+  { name: "Lembeh Strait", region: "North Sulawesi", country: "Indonesia" },
+  { name: "Poor Knights Islands", region: "Northland", country: "New Zealand" },
+  { name: "Tubbataha Reefs", region: "Sulu Sea", country: "Philippines" },
+  { name: "San Carlos Beach", region: "Monterey, California", country: "USA" },
+  { name: "Monterey Bay", region: "California", country: "USA" },
+  { name: "Madrona Point", region: "British Columbia", country: "Canada" }
 ];
 
 locations.sort((a, b) => a.country.localeCompare(b.country));
@@ -67,7 +68,7 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
   loader.style.display = "block";
 
   try {
-    const response = await fetch("http://localhost:8080/analyze-dive", {
+    const response = await fetch("http://localhost:8080/analyse-dive", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ location, date: day, time })

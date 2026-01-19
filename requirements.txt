@@ -3,3 +3,8 @@ uvicorn
 supabase
 python-dotenv
 requests
+pandas 
+numpy
+pandas
+scikit-learn
+joblib

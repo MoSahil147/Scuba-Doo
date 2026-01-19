@@ -5,3 +5,6 @@
 __pycache__/
 *.pyc
 *.xlsx
+/Data/notes.txt
+.python-version
+uv.lock

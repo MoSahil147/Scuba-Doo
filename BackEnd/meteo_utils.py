@@ -1,5 +1,8 @@
+## From the input we are giving in the frontend, after getting the lats, longi, time and date! Its sent here for fetching the marine and weather data.
+
 import requests
 
+## Fetching weather and Marine Data
 def get_weather_and_marine_data(lat: float, lon: float, date: str, time: str):
     weather_url = (
         f"https://api.open-meteo.com/v1/forecast?"
