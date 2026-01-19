@@ -9,7 +9,6 @@ for scuba divers.
 
 from typing import Dict, List, Any
 
-
 def calculate_ear_pressure_risk(
     depth: float,
     descent_rate: float = 5.0,
