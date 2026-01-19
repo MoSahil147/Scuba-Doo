@@ -150,3 +150,4 @@ async def analyse_dive(request: Request):
         "marine_life": top_animals,
         "ear_care": ear_care
     }
+    
