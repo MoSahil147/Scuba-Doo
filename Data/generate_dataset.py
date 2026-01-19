@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import random
 
-## Main settings
+## Main settingss
 SAMPLES_PER_PAIR = 100 ## will generate 100 datas
 OUTPUT_FILE = "Data/final_synthetic_dive_dataset.csv"  ## Will save inside the Data folder
 
