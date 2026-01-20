@@ -8,5 +8,4 @@ __pycache__/
 /Data/notes.txt
 /Data/test.py
 .python-version
-uv.lock
 *.mov
