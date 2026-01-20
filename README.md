@@ -38,8 +38,6 @@ The app responds instantly through a clean frontend, with real-time recommendati
   - Suit and sunscreen suggestions
   - Ear safety score with actionable advice
 
----
-
 ## Why I Built This Project Scuba-Doo
 
-I wanted to explore backend ML systems in a practical way, using real world data (for context, some of the data was synthetically generated). Scuba-Doo helped me understand API integration, ML inferences, data cleaning and most importantly decision logic — while making something personally meaningful as a diver.
+I wanted to explore backend ML systems in a practical way, using real world data (for context, some of the data was synthetically generated). Scuba-Doo helped me understand API integration, ML inferences, data cleaning and most importantly decision logic, while making something personally meaningful as a diver.
