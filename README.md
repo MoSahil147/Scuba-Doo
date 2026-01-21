@@ -1,8 +1,8 @@
-#  Scuba-Doo
+# Scuba-Doo
 
 A real-time web app that helps scuba divers with dive safety using weather, marine life, and environmental data. It predicts safety verdicts, recommends suits, shows marine life visibility and gives ear pressure advice using ML model and live APIs. Built as a side quest to learn FastAPI backends, since being a marine and tech geek at the same time.
 
-## Let's understand What It Does
+## Let's Understand What It Does
 
 When we select a dive location, date and time, at the frontend the app:
 
@@ -17,6 +17,16 @@ When we select a dive location, date and time, at the frontend the app:
     - Safety tips based on temperature and descent speed
 
 The app responds instantly through a clean frontend, with real-time recommendations.
+
+## Visual Overview
+
+### Project Working Demo
+
+![Project Working](Project%20Working%20Video.gif)
+
+### System Architecture
+
+![System Architecture](System%20Architecture.png)
 
 ## Tech Stack Used
 
