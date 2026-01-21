@@ -22,7 +22,7 @@ The app responds instantly through a clean frontend, with real-time recommendati
 
 ### Project Working Demo
 
-![Project Working](Project%20Working%20Video.gif)
+![Project Working](Project%20Working.gif)
 
 ### System Architecture
 
