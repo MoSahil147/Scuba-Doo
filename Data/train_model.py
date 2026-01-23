@@ -8,7 +8,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report
+from sklearn.metrics import classification_report, mean_squared_error, r2_score
 import joblib
 
 ## Step 1: Loading the dataset from CSV
@@ -109,13 +109,39 @@ print("Testing accuracy:", round(test_acc * 100, 2))
 y_train_pred = model.predict(X_train)
 y_test_pred = model.predict(X_test)
 
-## Step 11: Print detailed classification reports
+## Step 11: Generate detailed classification reports
+train_report = classification_report(y_train, y_train_pred, target_names=["unsafe", "safe"])
+test_report = classification_report(y_test, y_test_pred, target_names=["unsafe", "safe"])
+
+# Print Print the report
 print("\n--- Training Classification Report ---")
-print(classification_report(y_train, y_train_pred, target_names=["unsafe", "safe"]))
-
+print(train_report)
 print("\n--- Testing Classification Report ---")
-print(classification_report(y_test, y_test_pred, target_names=["unsafe", "safe"]))
+print(test_report)
 
+# Calculate and print regression metrics
+train_mse = mean_squared_error(y_train, y_train_pred)
+test_mse = mean_squared_error(y_test, y_test_pred)
+train_r2 = r2_score(y_train, y_train_pred)
+test_r2 = r2_score(y_test, y_test_pred)
+
+print("\n--- Regression Metrics (for reference) ---")
+print(f"Training MSE: {train_mse:.4f}, R2: {train_r2:.4f}")
+print(f"Testing MSE: {test_mse:.4f}, R2: {test_r2:.4f}")
+
+
+# Save reports to a file
+with open("Data/classification_report.txt", "w") as f:
+    f.write("--- Training Classification Report ---\n")
+    f.write(train_report)
+    f.write("\n--- Testing Classification Report ---\n")
+    f.write(test_report)
+    f.write("\n--- Regression Metrics (for reference) ---\n")
+    f.write(f"Training MSE: {train_mse:.4f}, R2: {train_r2:.4f}\n")
+    f.write(f"Testing MSE: {test_mse:.4f}, R2: {test_r2:.4f}\n")
+
+
+print("\nClassification reports saved to Data/classification_report.txt")
 
 ## Step 12: Save the trained model to a file
 joblib.dump(model, "Data/scuba_dive_model.pkl")

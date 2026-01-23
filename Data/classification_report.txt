@@ -1,0 +1,23 @@
+--- Training Classification Report ---
+              precision    recall  f1-score   support
+
+      unsafe       1.00      1.00      1.00      3042
+        safe       1.00      1.00      1.00      2718
+
+    accuracy                           1.00      5760
+   macro avg       1.00      1.00      1.00      5760
+weighted avg       1.00      1.00      1.00      5760
+
+--- Testing Classification Report ---
+              precision    recall  f1-score   support
+
+      unsafe       0.99      0.98      0.98       761
+        safe       0.97      0.99      0.98       679
+
+    accuracy                           0.98      1440
+   macro avg       0.98      0.98      0.98      1440
+weighted avg       0.98      0.98      0.98      1440
+
+--- Regression Metrics (for reference) ---
+Training MSE: 0.0000, R2: 1.0000
+Testing MSE: 0.0187, R2: 0.9248
