@@ -108,4 +108,4 @@ The Random Forest model demonstrates high accuracy in predicting dive safety. He
 
 ## Why I Built This Project
 
-Scuba-Doo was developed as a personal project to explore backend machine learning systems using real-world and synthetically generated data. As a marine and tech enthusiast, this project allowed me to deepen my understanding of API integration, ML inference, data cleaning, and decision logic, all while creating a tool personally meaningful for divers.
+Scuba-Doo was developed as a personal project by me to explore backend machine learning systems using real-world and synthetically generated data. As a marine and tech enthusiast, this project allowed me to deepen my understanding of API integration, ML inference, data cleaning, and decision logic, all while creating a tool personally meaningful for divers.
