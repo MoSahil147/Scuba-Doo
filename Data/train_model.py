@@ -8,6 +8,7 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
 import joblib
 
 ## Step 1: Loading the dataset from CSV
@@ -104,6 +105,18 @@ test_acc = model.score(X_test, y_test)
 print("Training accuracy:", round(train_acc * 100, 2))
 print("Testing accuracy:", round(test_acc * 100, 2))
 
-## Step 10: Save the trained model to a file
+## Step 10: Get predictions on training and testing sets
+y_train_pred = model.predict(X_train)
+y_test_pred = model.predict(X_test)
+
+## Step 11: Print detailed classification reports
+print("\n--- Training Classification Report ---")
+print(classification_report(y_train, y_train_pred, target_names=["unsafe", "safe"]))
+
+print("\n--- Testing Classification Report ---")
+print(classification_report(y_test, y_test_pred, target_names=["unsafe", "safe"]))
+
+
+## Step 12: Save the trained model to a file
 joblib.dump(model, "Data/scuba_dive_model.pkl")
 print("Model saved successfully, Check the Data folder")
