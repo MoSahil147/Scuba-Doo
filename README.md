@@ -1,22 +1,28 @@
-# Scuba-Doo
+# Scuba-Doo: Predictive Dive Safety Analysis
 
-A real-time web app that helps scuba divers with dive safety using weather, marine life, and environmental data. It predicts safety verdicts, recommends suits, shows marine life visibility and gives ear pressure advice using ML model and live APIs. Built as a side quest to learn FastAPI backends, since being a marine and tech geek at the same time.
+This project is a real-time web application designed to enhance scuba dive safety by integrating machine learning with environmental and marine data. It provides divers with predictive safety verdicts, equipment recommendations, marine life visibility forecasts, and essential ear pressure advice.
 
-## Let's Understand What It Does
+## Key Features
 
-When we select a dive location, date and time, at the frontend the app:
+- **Dive Safety Prediction:** Predicts whether a dive is "Safe" or "Unsafe" based on comprehensive data analysis.
+- **Wetsuit & SPF Recommendation:** Suggests appropriate wetsuit thickness and SPF levels tailored to environmental conditions.
+- **Marine Life Visibility:** Informs divers about visible marine species based on location and season.
+- **Ear Pressure Advice:** Offers personalized advice on ear equalization techniques and risk mitigation based on depth and temperature.
+- **Web-Based Interface:** An intuitive and responsive interface for easy interaction and real-time insights.
 
-- Pulls real-time weather and ocean data from **Open-Meteo APIs**
-- Fetches marine life and depth data from **Supabase**
-- Sends all collected information to a **Random Forest ML model** that:
-  - Predicts if the dive is **Safe** or **Unsafe**
-  - Recommends **wetsuit thickness** and **SPF level**
-  - Highlights visible marine animals based on season and location
-  - Calculates **ear pressure risk** and suggests:
-    - Equalisation techniques based on depth and diver experience
-    - Safety tips based on temperature and descent speed
+## How It Works
 
-The app responds instantly through a clean frontend, with real-time recommendations.
+The application gathers real-time weather and oceanographic data, combines it with marine life and dive site information, and processes it through a machine learning model to provide crucial safety predictions and recommendations.
+
+### Data Flow & Models
+
+- **Real-time Data Acquisition:** The app pulls weather and ocean data from Open-Meteo APIs and fetches marine life and depth data from Supabase.
+- **Machine Learning Core:** All collected information is fed into a pre-trained **Random Forest ML model**. This model performs:
+    -   **Dive Safety Prediction (Classification):** Determines if the dive is Safe or Unsafe.
+    -   **Equipment Recommendations (Regression/Classification):** Recommends wetsuit thickness and SPF level.
+    -   **Ear Pressure Risk Assessment:** Calculates ear pressure risks and suggests equalization techniques and safety tips.
+
+The application delivers instant responses through its frontend, ensuring divers have critical information at their fingertips.
 
 ## Visual Overview
 
@@ -26,28 +32,68 @@ The app responds instantly through a clean frontend, with real-time recommendati
 
 ### System Architecture
 
-![System Architecture](System%20Architecture.png)
+![System Architecture](System Architecture.png)
 
-## Tech Stack Used
+## Tech Stack
 
-### Backend
+-   **Backend:** Python, FastAPI, Uvicorn, joblib, Open-Meteo APIs, Supabase
+-   **Frontend:** HTML, CSS, JavaScript
+-   **ML Environment:** `uv` for package and environment management
 
-- **Python**, **FastAPI**: Core server and API
-- **joblib**: For loading the pre-trained ML model
-- **Open-Meteo APIs**: Weather, marine current, wave height, sea temperature
-- **Supabase**: Stores geotagged dive sites and marine life metadata
-- **Custom Ear Care Module**: Calculates depth/temp-based ear risks and mitigation tips
+---
 
-### Frontend
+## Getting Started
 
-- **HTML**, **CSS**, **JavaScript**: Simple, responsive UI
-- **Dropdowns**: Dynamic location selector from Supabase
-- **Form-based interaction**: Inputs dive details and displays:
-  - Dive safety verdict
-  - Top 3 visible marine species
-  - Suit and sunscreen suggestions
-  - Ear safety score with actionable advice
+Follow these instructions to get the Scuba-Doo project up and running on your local machine.
 
-## Why I Built This Project Scuba-Doo
+### Prerequisites
 
-I wanted to explore backend ML systems in a practical way, using real world data (for context, some of the data was synthetically generated). Scuba-Doo helped me understand API integration, ML inferences, data cleaning and most importantly decision logic, while making something personally meaningful as a diver.
+-   [Python 3.8+](https://www.python.org/downloads/)
+-   [uv](https://github.com/astral-sh/uv) (a fast Python package installer and resolver)
+
+### Installation & Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/MoSahil147/Scuba-Doo.git
+    cd Scuba-Doo
+    ```
+
+2.  **Set up the Python environment using `uv`:**
+    
+    First, create a virtual environment:
+    ```bash
+    uv venv
+    ```
+    
+    Then, activate the environment:
+    - On macOS/Linux:
+      ```bash
+      source .venv/bin/activate
+      ```
+    - On Windows:
+      ```bash
+      .venv\Scripts\activate
+      ```
+    
+    Finally, install the required packages:
+    ```bash
+    uv sync
+    ```
+
+### Running the Application
+
+1.  **Start the backend server:**
+    ```bash
+    uvicorn BackEnd.app:app --reload
+    ```
+    The backend will be running at `http://127.0.0.1:8000`.
+
+2.  **Open the frontend:**
+    Navigate to the `FrontEnd` directory and open the `index.html` file in your web browser.
+
+---
+
+## Why I Built This Project
+
+Scuba-Doo was developed as a personal project to explore backend machine learning systems using real-world and synthetically generated data. As a marine and tech enthusiast, this project allowed me to deepen my understanding of API integration, ML inference, data cleaning, and decision logic, all while creating a tool personally meaningful for divers.
