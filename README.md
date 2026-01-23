@@ -32,7 +32,7 @@ The application delivers instant responses through its frontend, ensuring divers
 
 ### System Architecture
 
-![System Architecture](System Architecture.png)
+![System Architecture](System%20Architecture.png)
 
 ## Tech Stack
 
