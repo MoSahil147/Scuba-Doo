@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import joblib
 import os
 import re
+from pathlib import Path
 
 from .supabase_client import get_coordinates, get_marine_animal_data
 from .meteo_utils import get_weather_and_marine_data
@@ -37,7 +38,8 @@ async def read_root():
     return {"message": "Scuba-Doo Backend is running!"}
 
 ## Load trained Random Forest model once when server starts
-MODEL_PATH = "Data/scuba_dive_model.pkl"
+## Using absolute path so it works regardless of where uvicorn is launched from
+MODEL_PATH = Path(__file__).parent.parent / "Data" / "scuba_dive_model.pkl"
 model = joblib.load(MODEL_PATH)
 
 ## Recommend wetsuit type based on temperature
