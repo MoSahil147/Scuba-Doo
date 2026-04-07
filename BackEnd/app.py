@@ -176,7 +176,7 @@ async def analyse_dive(request: Request):
      {ear_care['summary']}
 
      Max Recommended Depth: {ear_care['max_recommended_depth']}m
-     Ear Risk Level: {risk['risk_color']} {risk['risk_level']} (Score: {risk['risk_score']})
+     Ear Risk Level: {risk['risk_level']} (Score: {risk['risk_score']})
      Tips:
     """
     for tip in ear_care["safety_tips"][:5]:

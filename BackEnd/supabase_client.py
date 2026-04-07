@@ -43,10 +43,18 @@ def get_coordinates(location_name: str):
     if COORDINATES_CSV.exists():
         try:
             df = pd.read_csv(COORDINATES_CSV)
-            ## Case-insensitive search
+            
+            ## First try exact match (case-insensitive)
             match = df[df["name"].str.lower() == location_name.lower()]
             if not match.empty:
                 return match.iloc[0].to_dict()
+            
+            ## If not found, check if the CSV name is contained within the full location string
+            ## The frontend sends "Name, Region, Country"
+            for _, row in df.iterrows():
+                if row["name"].lower() in location_name.lower():
+                    return row.to_dict()
+                    
         except Exception as e:
             logger.error(f"Failed to read local coordinates CSV: {e}")
 
