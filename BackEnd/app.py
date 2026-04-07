@@ -2,6 +2,10 @@
 from fastapi import FastAPI, Request, HTTPException
 ## CORSMiddleware:- Allows backend to accept requests from other domains (like your frontend running on a different port), preventing CORS errors in the browser.
 from fastapi.middleware.cors import CORSMiddleware
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+from slowapi.errors import RateLimitExceeded
+from fastapi.responses import JSONResponse
 from dotenv import load_dotenv
 import joblib
 import os
@@ -15,8 +19,17 @@ from .ear_utils import get_ear_care_recommendations
 ## Load environment variables from .env file
 load_dotenv()
 
+## Rate limiter keyed by the caller's IP address.
+## get_remote_address extracts the real client IP even behind Render's proxy.
+limiter = Limiter(key_func=get_remote_address)
+
 ## Initialise FastAPI app
 app = FastAPI()
+app.state.limiter = limiter
+
+@app.exception_handler(RateLimitExceeded)
+async def rate_limit_handler(_request: Request, _exc: RateLimitExceeded):
+    return JSONResponse(status_code=429, content={"error": "Too many requests. Please wait a moment."})
 
 ## TODO (PRODUCTION): Set ALLOWED_ORIGINS in your hosting environment to your real frontend URL
 ## e.g. ALLOWED_ORIGINS=https://your-frontend-domain.com
@@ -58,7 +71,12 @@ def recommend_spf(uv):
     return "SPF 50+"
 
 ## Route to analyse dive based on location, date, and time
+## Rate limited to 10 requests per minute per IP
+## Why 10? A real user realistically submits 1-2 dives per session.
+## 10 gives generous room for retries without allowing bot-level abuse
+## that would run up Supabase reads, Open-Meteo calls, and GROQ token costs.
 @app.post("/analyse-dive")
+@limiter.limit("10/minute")
 async def analyse_dive(request: Request):
     data = await request.json()
     location = data.get("location")
