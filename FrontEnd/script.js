@@ -1,6 +1,6 @@
 // TODO (PRODUCTION): Change this to your deployed backend URL before going live
 // e.g. const API_BASE_URL = "https://scuba-doo-xxx.onrender.com";
-const API_BASE_URL = "http://127.0.0.1:8000"; // ← dev only, replace before deploying
+const API_BASE_URL = "https://scuba-doo.onrender.com"; // ← production backend
 
 const locations = [
   { name: "Snoopy Island", region: "Fujairah, Al Aqah", country: "UAE" },
