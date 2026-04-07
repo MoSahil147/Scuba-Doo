@@ -1,3 +1,7 @@
+// TODO (PRODUCTION): Change this to your deployed backend URL before going live
+// e.g. const API_BASE_URL = "https://your-api-domain.com";
+const API_BASE_URL = "http://127.0.0.1:8000"; // ← dev only
+
 const locations = [
   { name: "Snoopy Island", region: "Fujairah, Al Aqah", country: "UAE" },
   { name: "Shark Island", region: "Fujairah, Al Aqah", country: "UAE" },
@@ -68,7 +72,7 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
   loader.style.display = "block";
 
   try {
-    const response = await fetch("http://localhost:8080/analyse-dive", {
+    const response = await fetch(`${API_BASE_URL}/analyse-dive`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ location, date: day, time })
@@ -78,7 +82,10 @@ document.getElementById("submitBtn").addEventListener("click", async () => {
     loader.style.display = "none";
 
     if (data.error) {
-      resultText.innerHTML = `<div class='error'>${data.error}</div>`;
+      const errDiv = document.createElement("div");
+      errDiv.className = "error";
+      errDiv.textContent = data.error;
+      resultText.appendChild(errDiv);
     } else {
       resultText.textContent = data.llm_response;
     }

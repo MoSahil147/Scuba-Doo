@@ -1,10 +1,11 @@
 ## Here we come to the most important, working
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
 ## CORSMiddleware:- Allows backend to accept requests from other domains (like your frontend running on a different port), preventing CORS errors in the browser.
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 import joblib
 import os
+import re
 
 from .supabase_client import get_coordinates, get_marine_animal_data
 from .meteo_utils import get_weather_and_marine_data
@@ -16,14 +17,24 @@ load_dotenv()
 ## Initialise FastAPI app
 app = FastAPI()
 
+## TODO (PRODUCTION): Set ALLOWED_ORIGINS in your hosting environment to your real frontend URL
+## e.g. ALLOWED_ORIGINS=https://your-frontend-domain.com
+## The default below is for local development only (VS Code Live Server)
+_raw_origins = os.getenv("ALLOWED_ORIGINS", "http://127.0.0.1:5500,http://localhost:5500")
+allowed_origins = [o.strip() for o in _raw_origins.split(",") if o.strip()]
+
 ## Enable CORS for frontend integration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],         # Allow requests from any domain (frontend running on a different port or domain)
-    allow_credentials=True,      # Allow cookies and credentials in cross-origin requests
-    allow_methods=["*"],         # Allow all HTTP methods (GET, POST, etc.)
-    allow_headers=["*"],         # Allow all custom headers (like Content-Type, Authorization, etc.)
+    allow_origins=allowed_origins,   # Restrict to known frontend origins only
+    allow_credentials=True,          # Allow cookies and credentials in cross-origin requests
+    allow_methods=["GET", "POST"],   # Only the methods we actually use
+    allow_headers=["Content-Type"],  # Only headers the frontend sends
 )
+
+@app.get("/")
+async def read_root():
+    return {"message": "Scuba-Doo Backend is running!"}
 
 ## Load trained Random Forest model once when server starts
 MODEL_PATH = "Data/scuba_dive_model.pkl"
@@ -51,6 +62,16 @@ async def analyse_dive(request: Request):
     location = data.get("location")
     date = data.get("date")
     time = data.get("time")
+
+    ## Input validation
+    if not isinstance(location, str) or not location.strip():
+        raise HTTPException(status_code=400, detail="Invalid location")
+    if len(location) > 200:
+        raise HTTPException(status_code=400, detail="Location name too long")
+    if not isinstance(date, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", date):
+        raise HTTPException(status_code=400, detail="Invalid date format, expected YYYY-MM-DD")
+    if not isinstance(time, str) or not re.fullmatch(r"\d{2}:\d{2}", time):
+        raise HTTPException(status_code=400, detail="Invalid time format, expected HH:MM")
 
     ## Get latitude and longitude for selected dive location
     coordinates = get_coordinates(location)
