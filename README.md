@@ -2,6 +2,8 @@
 
 🌊 **Live at: [https://scuba-doo.netlify.app](https://scuba-doo.netlify.app)**
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/MoSahil147/Scuba-Doo)
+
 This project is a real-time web application designed to enhance scuba dive safety by integrating machine learning with environmental and marine data. It provides divers with predictive safety verdicts, equipment recommendations, marine life visibility forecasts, and essential ear pressure advice.
 
 ## Key Features
