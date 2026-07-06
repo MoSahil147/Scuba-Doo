@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 import joblib
 import os
 import re
+import logging
 from pathlib import Path
 
 from .supabase_client import get_coordinates, get_marine_animal_data
@@ -18,6 +19,9 @@ from .ear_utils import get_ear_care_recommendations
 
 ## Load environment variables from .env file
 load_dotenv()
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 ## Rate limiter keyed by the caller's IP address.
 ## get_remote_address extracts the real client IP even behind Render's proxy.
@@ -102,9 +106,16 @@ async def analyse_dive(request: Request):
     lon = coordinates["longitude"]
 
     ## Fetch weather and marine data from Open-Meteo APIs
-    api_data = get_weather_and_marine_data(lat, lon, date, time)
+    try:
+        api_data = get_weather_and_marine_data(lat, lon, date, time)
+    except Exception as e:
+        logger.error(f"Weather/marine API request failed for {location} ({lat}, {lon}): {e}")
+        return {"error": "Could not reach the weather service. Please try again shortly."}
+
     marine = api_data["marine"]
     weather = api_data["weather"]
+    weather_i = api_data["weather_hour_index"]
+    marine_i = api_data["marine_hour_index"]
 
     ## Extract features required by the model
     try:
@@ -113,14 +124,17 @@ async def analyse_dive(request: Request):
             lon,
             int(date.split("-")[1]),                     ## month
             int(time.split(":")[0]),                     ## hour_of_day
-            marine["hourly"]["wave_height"][0],
-            marine["hourly"]["sea_surface_temperature"][0],
-            marine["hourly"]["ocean_current_velocity"][0],
-            weather["daily"]["uv_index_max"][0],
-            weather["hourly"]["pressure_msl"][0],
+            marine["hourly"]["wave_height"][marine_i],
+            marine["hourly"]["sea_surface_temperature"][marine_i],
+            marine["hourly"]["ocean_current_velocity"][marine_i],
+            weather["daily"]["uv_index_max"][0],          ## one day requested, so index 0
+            weather["hourly"]["pressure_msl"][weather_i],
             coordinates.get("typical_depth", 20)         ## fallback in case missing
         ]
-    except Exception:
+    except Exception as e:
+        logger.error(f"Failed to build feature vector for {location} ({lat}, {lon}): {e}. "
+                     f"marine keys={list(marine.keys()) if isinstance(marine, dict) else marine}, "
+                     f"weather keys={list(weather.keys()) if isinstance(weather, dict) else weather}")
         return {"error": "Error preparing input features from weather APIs"}
 
     ## Predict safe or unsafe using trained Random Forest model
