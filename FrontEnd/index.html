@@ -2,12 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SCUBA-DOO</title>
   <link rel="icon" type="image/jpeg" href="Sea.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 
-  <!-- Open Graph — controls the preview card when sharing the link on WhatsApp, Discord, LinkedIn etc. -->
-  <meta property="og:title"       content="Scuba-Doo — Predictive Dive Safety Analysis">
+  <!-- Open Graph: controls the preview card when sharing the link on WhatsApp, Discord, LinkedIn etc. -->
+  <meta property="og:title"       content="Scuba-Doo: Predictive Dive Safety Analysis">
   <meta property="og:description" content="Get real-time dive safety verdicts, wetsuit recommendations, marine life forecasts, and ear pressure advice powered by ML.">
   <meta property="og:image"       content="https://scuba-doo.netlify.app/Sea.jpg">
   <meta property="og:url"         content="https://scuba-doo.netlify.app">
@@ -15,7 +19,7 @@
 
   <!-- Twitter / X card (uses same Sea.jpg) -->
   <meta name="twitter:card"        content="summary_large_image">
-  <meta name="twitter:title"       content="Scuba-Doo — Predictive Dive Safety Analysis">
+  <meta name="twitter:title"       content="Scuba-Doo: Predictive Dive Safety Analysis">
   <meta name="twitter:description" content="Real-time dive safety powered by ML.">
   <meta name="twitter:image"       content="https://scuba-doo.netlify.app/Sea.jpg">
 </head>
@@ -23,32 +27,51 @@
 
   <!-- PAGE 1 -->
   <section class="section hero">
-    <div class="hero-text">WELCOME TO SCUBA-DOO!! 🐠 🤿</div>
+    <div class="hero-inner reveal">
+      <div class="hero-eyebrow">PREDICTIVE DIVE SAFETY</div>
+      <h1 class="hero-text">Welcome to Scuba&#8209;Doo</h1>
+      <p class="hero-sub">Know before you go. Real-time verdicts, wetsuit picks &amp; marine life forecasts. <span class="hero-emoji">🐠 🤿</span></p>
+    </div>
+    <a href="#plan" class="scroll-cue" aria-label="Scroll to form">
+      <span class="scroll-cue-dot"></span>
+    </a>
   </section>
 
   <!-- PAGE 2 -->
-  <section class="section form-section">
-    <div class="form-box">
-
-      <div class="form-row">
-        <div class="form-label">LOCATION OF YOUR DIVE</div>
-        <select id="location">
-          <option value="">-- Select Dive Location --</option>
-        </select>
+  <section class="section form-section" id="plan">
+    <div class="form-box reveal">
+      <div class="form-box-header">
+        <div class="form-box-title">Plan Your Dive</div>
+        <div class="form-box-subtitle">Tell us where and when, and we'll do the rest.</div>
       </div>
 
       <div class="form-row">
-        <div class="form-label">DATE</div>
-        <input type="date" id="day">
+        <label class="form-label" for="location">Location of your dive</label>
+        <div class="input-wrap">
+          <select id="location">
+            <option value="">-- Select Dive Location --</option>
+          </select>
+        </div>
       </div>
 
       <div class="form-row">
-        <div class="form-label">TIME</div>
-        <input type="time" id="time">
+        <label class="form-label" for="day">Date</label>
+        <div class="input-wrap">
+          <input type="date" id="day">
+        </div>
       </div>
 
-      <button class="submit-btn" id="submitBtn">Submit</button>
-      <div id="loader" class="loader" style="display: none;"></div>
+      <div class="form-row">
+        <label class="form-label" for="time">Time</label>
+        <div class="input-wrap">
+          <input type="time" id="time">
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button class="submit-btn" id="submitBtn"><span>Submit</span></button>
+        <div id="loader" class="loader" style="display: none;"></div>
+      </div>
 
       <div id="result-container" style="display: none;">
         <div id="result-text"></div>

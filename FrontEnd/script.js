@@ -2,6 +2,16 @@
 // e.g. const API_BASE_URL = "https://scuba-doo-xxx.onrender.com";
 const API_BASE_URL = "https://scuba-doo.onrender.com"; // ← production backend
 
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("is-visible");
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll(".reveal").forEach(el => revealObserver.observe(el));
+
 const locations = [
   { name: "Snoopy Island", region: "Fujairah, Al Aqah", country: "UAE" },
   { name: "Shark Island", region: "Fujairah, Al Aqah", country: "UAE" },
